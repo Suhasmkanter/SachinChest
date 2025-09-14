@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-WORKDIR /tb_detect/tb_detect
+WORKDIR /app
 COPY tb_detect/tb_detect .   # copies the contents of your inner folder into WORKDIR
 
 # Upgrade pip and setuptools
