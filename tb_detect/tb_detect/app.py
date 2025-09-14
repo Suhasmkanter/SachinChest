@@ -1,17 +1,16 @@
-from flask import Flask, json, render_template, request
+from flask import Flask, json, request
 from tb_detection_model import TBDetectionModel
 import os
 from flask_cors import CORS
 
-
 app = Flask(__name__)
-
 CORS(app)
-# Load model
-MODEL_PATH = r"E:\SachinProject (1)\ChextXRay\tb_detect\tb_detect\tb_model.h5"
+
+# Load model from container path (relative path)
+MODEL_PATH = os.path.join(os.getcwd(), "tb_model.h5")  # Place your model in tb_detect/tb_detect folder
 tb_model = TBDetectionModel(model_path=MODEL_PATH)
 
-# Uploads folder
+# Uploads folder inside container
 UPLOAD_FOLDER = os.path.join(os.getcwd(), "uploads")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -26,21 +25,19 @@ def index():
             filepath = os.path.join(UPLOAD_FOLDER, file.filename)
             file.save(filepath)
 
-            
-            prediction, confidence = tb_model.predict(filepath)  # returns a dict
+            prediction, confidence = tb_model.predict(filepath)
 
-            # Convert to Python native types if needed
+            # Convert numpy arrays to lists if needed
             if hasattr(prediction, "tolist"):
                 prediction = prediction.tolist()
             if hasattr(confidence, "tolist"):
                 confidence = confidence.tolist()
-                
 
     return json.jsonify({
         "result": prediction,
         "confidence": confidence
     })
 
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Use Render's PORT variable
+    app.run(host="0.0.0.0", port=port)
