@@ -1,5 +1,4 @@
 tensorflow==2.20.0
-keras==2.20.0  # match TF version
 numpy>=1.26.0
 opencv-python==4.8.0.74
 Pillow==10.0.0
@@ -9,3 +8,4 @@ uvicorn==0.23.2
 python-multipart==0.0.6
 flask
 flask-cors
+# remove keras completely, use `from tensorflow import keras` in your code
