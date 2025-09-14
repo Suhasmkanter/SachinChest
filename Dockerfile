@@ -17,7 +17,6 @@ RUN pip install --upgrade pip setuptools wheel setuptools_scm
 RUN pip install --prefer-binary -r requirements.txt
 
 # Set environment variable for Python to find your app
-ENV PYTHONPATH=/app/tb_detect
 
 # Run your app
 CMD ["python", "tb_detect/app.py"]
