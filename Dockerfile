@@ -14,4 +14,4 @@ RUN pip install --upgrade pip setuptools wheel
 RUN pip install -r requirements.txt
 
 # Command to run your app (replace app.py with your main file)
-CMD ["python", "app.py"]
+CMD ["python", "tb_detect/tb_detect/app.py"]
