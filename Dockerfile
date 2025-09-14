@@ -19,4 +19,6 @@ RUN pip install --prefer-binary -r requirements.txt
 # Set environment variable for Python to find your app
 
 # Run your app
+EXPOSE 5000
+
 CMD ["python", "tb_detect/app.py"]
