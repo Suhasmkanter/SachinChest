@@ -1,17 +1,12 @@
-# Use Python 3.12 slim image
-FROM python:3.12.6-slim
+FROM python:3.11-slim
 
-# Set working directory
-WORKDIR /tb_detect/tb_detect
-
-# Copy all your project files into the container
+WORKDIR /app
 COPY . .
 
-# Upgrade pip, setuptools, wheel
-RUN pip install --upgrade pip setuptools wheel
+# Upgrade pip and setuptools
+RUN pip install --upgrade pip setuptools wheel setuptools_scm
 
-# Install your requirements
-RUN pip install -r requirements.txt
+# Install dependencies with prebuilt wheels
+RUN pip install --prefer-binary -r requirements.txt
 
-# Command to run your app (replace app.py with your main file)
 CMD ["python", "tb_detect/tb_detect/app.py"]
