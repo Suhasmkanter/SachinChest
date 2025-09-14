@@ -6,7 +6,7 @@ WORKDIR /app
 COPY tb_detect/tb_detect/ .
 
 # Copy requirements.txt from inner folder
-COPY chextxray/requirements.txt .
+COPY requirements.txt .
 
 # Upgrade pip and install dependencies
 RUN pip install --upgrade pip setuptools wheel setuptools_scm
