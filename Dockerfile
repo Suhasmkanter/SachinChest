@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy your backend code into the container
 COPY tb_detect/tb_detect/ ./tb_detect/
 
+# Copy the model file explicitly into the container root
+COPY tb_detect/tb_detect/tb_model.h5 ./tb_model.h5
+
 # Copy requirements.txt into the container
 COPY requirements.txt .
 
@@ -16,9 +19,8 @@ RUN pip install --upgrade pip setuptools wheel setuptools_scm
 # Install dependencies
 RUN pip install --prefer-binary -r requirements.txt
 
-# Set environment variable for Python to find your app
-
-# Run your app
+# Expose the port
 EXPOSE 5000
 
+# Run your app
 CMD ["python", "tb_detect/app.py"]
